@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: LFC API POC
+
+Parameters:
+  TestSNS: {Type: String}
+
+Resources:
+  CimsImportLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      InlineCode: |-
+        exports.handler = function(event, context) {
+            console.log('Hello Cims');
+            context.succeed('Hello, Cims!');    
+        };
+      Handler: index.handler
+      Runtime: nodejs8.10
+      Timeout: 60
+      Policies: 
+      - AWSLambdaExecute
+      Events:
+       TopicEvent:
+        Type: SNS
+        Properties:
+         Topic: !Ref TestSNS

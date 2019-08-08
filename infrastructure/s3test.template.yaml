@@ -1,0 +1,15 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: create a single S3 bucket
+
+Parameters:
+  MyBucketName: {Type: String}
+
+Resources:
+  SampleBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref MyBucketName
+Outputs:
+  BucketName:
+    Value: !Ref 'SampleBucket'
+    Description: Some test description
